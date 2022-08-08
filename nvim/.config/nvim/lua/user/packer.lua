@@ -33,13 +33,15 @@ return packer.startup(function(use)
 
 	use("nvim-treesitter/nvim-treesitter", {
 		run = ":TSUpdate"
-	}) 
+	})
 
 	use("neovim/nvim-lspconfig")
 
 	use("williamboman/mason.nvim")
 
 	use("williamboman/mason-lspconfig.nvim")
+
+	use("navarasu/onedark.nvim")
 
 	-- Automatically set up config after cloning packer.nvim
 	if is_bootstrap then
