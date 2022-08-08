@@ -8,8 +8,16 @@ end
 
 local status_ok, packer = pcall(require, "packer")
 if not status_ok then
+	print("Unable to load packer")
 	return
 end
+
+vim.cmd([[
+  augroup packer_user_config
+    autocmd!
+    autocmd BufWritePost packer.lua source <afile> | PackerSync
+  augroup end
+]])
 
 -- Use a popup window for packer
 packer.init({
@@ -20,8 +28,12 @@ packer.init({
 	},
 })
 
-packer.startup(function(use)
+return packer.startup(function(use)
 	use 'wbthomason/packer.nvim'
+
+	use("nvim-treesitter/nvim-treesitter", {
+		run = ":TSUpdate"
+	}) 
 
 	-- Automatically set up config after cloning packer.nvim
 	if is_bootstrap then
