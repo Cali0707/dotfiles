@@ -29,7 +29,7 @@ require('nvim-treesitter.configs').setup {
 		"verilog",
 		"yaml"
 	},
-	
+
 	-- Install asynchronously
 	sync_install = false,
 

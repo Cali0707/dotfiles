@@ -43,6 +43,10 @@ return packer.startup(function(use)
 
 	use("navarasu/onedark.nvim")
 
+    use { 'nvim-telescope/telescope.nvim', requires = { 'nvim-lua/plenary.nvim' } }
+
+    use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', cond = vim.fn.executable "make" == 1 }
+
 	-- Automatically set up config after cloning packer.nvim
 	if is_bootstrap then
 		require("packer").sync()
