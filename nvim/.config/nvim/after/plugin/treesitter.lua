@@ -36,6 +36,11 @@ require('nvim-treesitter.configs').setup {
 	-- Automatically install any missing parser when needed
 	auto_install = true,
 
+    indent = {
+        enable = true,
+        disable = { 'python', 'c' }
+    },
+
 	-- options about highlighting
 	highlight = {
 		enable = true,
