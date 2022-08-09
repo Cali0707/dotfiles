@@ -47,6 +47,10 @@ return packer.startup(function(use)
 
     use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', cond = vim.fn.executable "make" == 1 }
 
+    use { 'hrsh7th/nvim-cmp', requires = { 'hrsh7th/cmp-nvim-lsp' } }
+
+    use { 'L3MON4D3/LuaSnip', requires = { 'saadparwaiz1/cmp_luasnip' } }
+
 	-- Automatically set up config after cloning packer.nvim
 	if is_bootstrap then
 		require("packer").sync()
