@@ -9,6 +9,7 @@ require("nvim-tree").setup({
     sort_by = "case_insensitive",
     view = {
         adaptive_size = true,
+        side = "left",
         mappings = {
             list = {
                 { key = "u", action = "dir_up" },
@@ -18,3 +19,4 @@ require("nvim-tree").setup({
 })
 
 nmap("<leader>tt", ":NvimTreeToggle<CR>", "[T]oggle [T]ree")
+nmap("<leader>tf", ":NvimTreeFocus<CR>", "[T]ree [F]ocus")

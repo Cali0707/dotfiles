@@ -26,7 +26,7 @@ local on_attach = function(_, bufnr)
         { desc = 'Format current buffer with LSP' })
 end
 
-local servers = { 'clangd', 'rust_analyzer', 'pyright', 'tsserver', 'dartls', 'bashls', 'gopls', 'sumneko_lua' }
+local servers = { 'clangd', 'rust_analyzer', 'pyright', 'tsserver', 'bashls', 'gopls', 'lua_ls', 'sqlls' }
 
 require('mason').setup()
 require('mason-lspconfig').setup({
@@ -34,7 +34,7 @@ require('mason-lspconfig').setup({
     -- automatic_installation = true
 })
 
-local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 for _, lsp in ipairs(servers) do
     require('lspconfig')[lsp].setup {
@@ -48,7 +48,7 @@ local runtime_path = vim.split(package.path, ';')
 table.insert(runtime_path, 'lua/?.lua')
 table.insert(runtime_path, 'lua/?/init.lua')
 
-require('lspconfig').sumneko_lua.setup {
+require('lspconfig').lua_ls.setup {
     on_attach = on_attach,
     settings = {
         Lua = {

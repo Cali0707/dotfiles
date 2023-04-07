@@ -29,6 +29,10 @@ packer.init({
 })
 
 return packer.startup(function(use)
+    -- local packages
+    use "~/Personal/projects/nuggit.nvim"
+    -- remote packages
+
     use 'wbthomason/packer.nvim'
 
     use("nvim-treesitter/nvim-treesitter", {
@@ -41,7 +45,9 @@ return packer.startup(function(use)
 
     use("williamboman/mason-lspconfig.nvim")
 
-    use("navarasu/onedark.nvim")
+    -- use({ 'monsonjeremy/onedark.nvim', branch = 'treesitter' })
+
+    use { 'olimorris/onedarkpro.nvim' }
 
     use { 'nvim-telescope/telescope.nvim', requires = { 'nvim-lua/plenary.nvim' } }
 
@@ -51,12 +57,30 @@ return packer.startup(function(use)
 
     use { 'L3MON4D3/LuaSnip', requires = { 'saadparwaiz1/cmp_luasnip' } }
 
+    use { 'jamestthompson3/nvim-remote-containers' }
+
     use {
         'kyazdani42/nvim-tree.lua',
         requires = {
             'kyazdani42/nvim-web-devicons', -- optional, for file icons
         },
         tag = 'nightly' -- optional, updated every week. (see issue #1193)
+    }
+
+    use {
+        'ThePrimeagen/harpoon',
+        requires = {
+            'nvim-lua/plenary.nvim'
+        }
+    }
+
+    use {
+        'https://git.sr.ht/~whynothugo/lsp_lines.nvim'
+    }
+
+    use {
+        'akinsho/toggleterm.nvim',
+        tag = '*'
     }
 
     -- Automatically set up config after cloning packer.nvim
