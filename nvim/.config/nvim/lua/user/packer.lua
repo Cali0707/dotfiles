@@ -30,7 +30,7 @@ packer.init({
 
 return packer.startup(function(use)
     -- local packages
-    use "~/Personal/projects/nuggit.nvim"
+    -- use "~/Personal/projects/nuggit.nvim"
     -- remote packages
 
     use 'wbthomason/packer.nvim'
