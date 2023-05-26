@@ -2,7 +2,6 @@ local indent = 4
 
 vim.o.formatoptions = "jcroqlnt"
 vim.opt.breakindent = true
-vim.opt.cmdheight = 0
 vim.opt.completeopt = "menuone,noselect"
 vim.opt.hlsearch = false
 vim.opt.number = true
