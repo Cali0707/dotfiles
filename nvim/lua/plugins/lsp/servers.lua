@@ -20,6 +20,7 @@ local servers = {
 			},
 		},
 	},
+	jdtls = {},
 }
 
 local function lsp_attach(on_attach)
@@ -54,5 +55,3 @@ function M.setup(_)
 end
 
 return M
-
-
