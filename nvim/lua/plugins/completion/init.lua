@@ -4,11 +4,11 @@ return {
 		event = "InsertEnter",
 		dependencies = {
 			"hrsh7th/cmp-nvim-lsp",
-      		"saadparwaiz1/cmp_luasnip",
-      		"hrsh7th/cmp-buffer",
-      		"hrsh7th/cmp-path",
-      		"hrsh7th/cmp-cmdline",
-    	},
+			"saadparwaiz1/cmp_luasnip",
+			"hrsh7th/cmp-buffer",
+			"hrsh7th/cmp-path",
+			"hrsh7th/cmp-cmdline",
+		},
 		config = function()
 			local cmp = require("cmp")
 			local luasnip = require("luasnip")
@@ -27,24 +27,6 @@ return {
 						behavior = cmp.ConfirmBehavior.Replace,
 						select = true,
 					},
-					["<Tab>"] = cmp.mapping(function(fallback)
-						if cmp.visible() then
-							cmp.select_next_item()
-						elseif luasnip.expand_or_jumpable() then
-							luasnip.expand_or_jump()
-						else
-							fallback()
-						end
-					end, {"i", "s", }),
-					["<S-Tab>"] = cmp.mapping(function(fallback)
-						if cmp.visible() then
-							cmp.select_prev_item()
-						elseif luasnip.jumpable(-1) then
-							luasnip.jump(-1)
-						else
-							fallback()
-						end
-					end, {"i", "s"} ),
 				},
 				sources = cmp.config.sources {
 					{ name = "nvim_lsp_signature_help" },
@@ -74,12 +56,12 @@ return {
 	},
 	{
 		"L3MON4D3/LuaSnip",
-    	dependencies = {
-      		"rafamadriz/friendly-snippets",
-      		config = function()
-        		require("luasnip.loaders.from_vscode").lazy_load()
-      		end,
-    	},
+		dependencies = {
+			"rafamadriz/friendly-snippets",
+			config = function()
+				require("luasnip.loaders.from_vscode").lazy_load()
+			end,
+		},
 		config = {
 			history = true,
 			delete_check_events = "TextChanged",
@@ -91,7 +73,10 @@ return {
 				function()
 					return require("luasnip").jumpable(1) and "<Plug>luasnip-jump-next" or "<tab>"
 				end,
-				expr = true, remap = true, silent = true, mode = "i"
+				expr = true,
+				remap = true,
+				silent = true,
+				mode = "i"
 			},
 			{
 				"<tab>",
@@ -110,7 +95,3 @@ return {
 		},
 	},
 }
-
-		
-			
-
