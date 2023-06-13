@@ -24,4 +24,4 @@ precmd_functions+=( precmd_vcs_info )
 setopt prompt_subst
 zstyle ':vcs_info:git:*' formats '%F{green}(%b)%r%f'
 zstyle ':vcs_info:*' enable git
-PROMPT='%(?.%F{green}√.%F{red}?%?)%f %B%F{white}%8~%f%b ${vcs_info_msg_0_} %# '
+PROMPT='%(?.%F{green}√.%F{red}?%?)%f %B%F{yellow}%8~%f%b ${vcs_info_msg_0_} %# '
