@@ -4,8 +4,8 @@ return {
 		event = "BufReadPre",
 		dependencies = {
 			{ "folke/neoconf.nvim", cmd = "Neoconf", config = true },
-			{ "folke/neodev.nvim", config = true },
-			{ "j-hui/fidget.nvim", config = true },
+			{ "folke/neodev.nvim",  config = true },
+			{ "j-hui/fidget.nvim",  config = true },
 			"williamboman/mason.nvim",
 			"williamboman/mason-lspconfig.nvim",
 			"hrsh7th/cmp-nvim-lsp",
@@ -21,6 +21,7 @@ return {
 		keys = { { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" } },
 		ensure_installed = {
 			"stylua",
+			"delve",
 		},
 		config = function(plugin)
 			require("mason").setup()
