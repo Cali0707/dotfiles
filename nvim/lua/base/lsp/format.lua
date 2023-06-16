@@ -10,9 +10,10 @@ end
 function M.format()
 	local buf = vim.api.nvim_get_current_buf()
 	local ft = vim.bo[buf].filetype
-	local have_nls = package.loaded["null-ls"] and (#require("null-ls.sources").get_available(ft, "NULL_LS_FORMATTING") > 0)
+	local have_nls = package.loaded["null-ls"]
+		and (#require("null-ls.sources").get_available(ft, "NULL_LS_FORMATTING") > 0)
 
-	vim.lsp.buf.format {
+	vim.lsp.buf.format({
 		bufnr = buf,
 		filter = function(client)
 			if have_nls then
@@ -20,16 +21,21 @@ function M.format()
 			end
 			return client.name ~= "null-ls"
 		end,
-	}
+		timeout_ms = 3000,
+	})
 end
 
 function M.on_attach(client, buf)
-	if client.config and client.config.capabilities and client.config.capabilities.documentFormattingProvider == false then
+	if
+		client.config
+		and client.config.capabilities
+		and client.config.capabilities.documentFormattingProvider == false
+	then
 		return
 	end
-	if client.supports_method "textDocument/formatting" then
+	if client.supports_method("textDocument/formatting") then
 		vim.api.nvim_create_autocmd("BufWritePre", {
-			group = vim.api.nvim_create_augroup("LspFormat." ..buf, {}),
+			group = vim.api.nvim_create_augroup("LspFormat." .. buf, {}),
 			buffer = buf,
 			callback = function()
 				if M.autoformat then
@@ -41,4 +47,3 @@ function M.on_attach(client, buf)
 end
 
 return M
-

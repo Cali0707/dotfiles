@@ -44,7 +44,7 @@ function M:map(lhs, rhs, opts)
 	vim.keymap.set(
 		opts.mode or "n",
 		lhs,
-		type(rhs) == "string" and ("<cmd>%s<cr"):format(rhs) or rhs,
+		type(rhs) == "string" and ("<cmd>%s<cr>"):format(rhs) or rhs,
 		{ silent = true, buffer = self.buffer, expr = opts.expr, desc = opts.desc }
 	)
 end
@@ -53,7 +53,7 @@ function M.diagnostic_goto(next, severity)
 	local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
 	severity = severity and vim.diagnostic.severity[severity] or nil
 	return function()
-		go { severity = severity }
+		go({ severity = severity })
 	end
 end
 
