@@ -1,7 +1,7 @@
 return {
 	{
 		"neovim/nvim-lspconfig",
-		event = { "BufReadPre", "BufReadFile" },
+		event = { "BufReadPre", "BufNewFile" },
 		dependencies = {
 			{ "j-hui/fidget.nvim", config = true },
 			"williamboman/mason.nvim",
@@ -12,7 +12,7 @@ return {
 			setup = {},
 		},
 		config = function(plugin, opts)
-			require("base.lsp.server").setup(plugin, opts)
+			require("base.lsp.servers").setup(plugin, opts)
 		end,
 	},
 	{
@@ -30,7 +30,7 @@ return {
 			local function ensure_installed()
 				for _, tool in ipairs(opts.ensure_installed) do
 					local p = mr.get_package(tool)
-					if not p:is_installed()
+					if not p:is_installed() then
 						p:install()
 					end
 				end

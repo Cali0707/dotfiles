@@ -6,7 +6,7 @@ function M.capabilities()
 		dynamicRegistration = false,
 		lineFoldingOnly = true,
 	}
-	return require("vmp_nvim_lsp").default_capabilities(capabilities)
+	return require("cmp_nvim_lsp").default_capabilities(capabilities)
 end
 
 function M.on_attach(on_attach)

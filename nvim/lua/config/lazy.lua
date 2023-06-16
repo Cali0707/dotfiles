@@ -11,11 +11,18 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup("plugins", {
+require("lazy").setup {
+	spec = {
+		{ import = "base" },
+		{ import = "pde" },
+	},
 	defaults = { lazy = true, version = nil },
 	install = { missing = true, colorscheme = { "tokyonight" } },
 	checker = { enabled = true },
 	performance = {
+		cache = {
+			enabled = true,
+		},
 		rtp = {
 			disabled_plugins = {
 				"gzip",
@@ -29,6 +36,6 @@ require("lazy").setup("plugins", {
 			},
 		},
 	},
-})
+}
 
 vim.keymap.set("n", "<leader>lz", "<cmd>:Lazy<cr>", { desc = "Lazy Plugin Manager" })

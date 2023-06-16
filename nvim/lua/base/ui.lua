@@ -1,7 +1,7 @@
 return {
 	{
 		"nvim-tree/nvim-web-devicons",
-		dependencies = { "DailyXendo/nvim-material-icon" },
+		dependencies = { "DaikyXendo/nvim-material-icon" },
 		config = function()
 			require("nvim-web-devicons").setup {
 				override = require("nvim-material-icon").get_icons(),
@@ -13,7 +13,7 @@ return {
 		lazy = false,
 		priority = 1000,
 		opts = {
-			style = "night"
+			style = "night",
 			transparent = false,
 			styles = {
 				sidebars = "transparent",

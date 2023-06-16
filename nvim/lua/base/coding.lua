@@ -2,11 +2,11 @@ return {
 	{
 		"kylechui/nvim-surround",
 		event = "VeryLazy",
-		opts= {},
+		opts = {},
 	},
 	{
 		"numToStr/Comment.nvim",
-		keys = { { "gc", mode = { "n", "v" } }, { "gcc", mode = { "n", "v", } }, { "gbc", mode = { "n", "v" } } },
+		keys = { { "gc", mode = { "n", "v" } }, { "gcc", mode = { "n", "v" } }, { "gbc", mode = { "n", "v" } } },
 		config = function(_, _)
 			require("Comment").setup({})
 		end,
@@ -16,7 +16,7 @@ return {
 		event = "InsertEnter",
 		dependencies = {
 			"hrsh7th/cmp-nvim-lsp",
-			"saadparwaazi/cmp_luasnip",
+			"saadparwaiz1/cmp_luasnip",
 			"hrsh7th/cmp-buffer",
 			"hrsh7th/cmp-path",
 		},
@@ -38,10 +38,11 @@ return {
 			}
 			local has_words_before = function()
 				local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-				return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match "%s" == nil
+				return col ~= 0
+					and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
 			end
 
-			cmp.setup {
+			cmp.setup({
 				completion = {
 					completeopt = "menu,menuone,noinsert",
 				},
@@ -63,19 +64,19 @@ return {
 						require("luasnip").lsp_expand(args.body)
 					end,
 				},
-				mapping = cmp.mapping.preset.insert {
+				mapping = cmp.mapping.preset.insert({
 					["<C-Space>"] = cmp.mapping.complete(),
 					["<C-e>"] = cmp.mapping.abort(),
-					["<CR>"] = cmp.mapping {
-						i = cmp.mapping.confirm { behavior  = cmp.ConfirmBehavior.Replace, select = false },
+					["<CR>"] = cmp.mapping({
+						i = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false }),
 						c = function(fallback)
 							if cmp.visible() then
-								cmp.confirm { behavior = cmp.ConfirmBehavior.Replace, select = false }
+								cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
 							else
 								fallback()
 							end
 						end,
-					},
+					}),
 					["<C-j>"] = cmp.mapping(function(fallback)
 						if cmp.visible() then
 							cmp.select_next_item()
@@ -87,10 +88,10 @@ return {
 							fallback()
 						end
 					end, {
-					    "i",
-					    "s,",
-					    "c",
-				    }),
+						"i",
+						"s,",
+						"c",
+					}),
 					["<C-k>"] = cmp.mapping(function(fallback)
 						if cmp.visible() then
 							cmp.select_prev_item()
@@ -100,18 +101,18 @@ return {
 							fallback()
 						end
 					end, {
-					    "i",
-					    "s,",
-					    "c",
-				    }),
-				},
-				sources = cmp.config.sources {
-					{ name = "nvim_lsp_signature_help", group_index = 1},
+						"i",
+						"s,",
+						"c",
+					}),
+				}),
+				sources = cmp.config.sources({
+					{ name = "nvim_lsp_signature_help", group_index = 1 },
 					{ name = "nvim_lsp", group_index = 1 },
 					{ name = "luasnip", group_index = 1 },
 					{ name = "buffer", group_index = 2 },
 					{ name = "path", group_index = 2 },
-				},
+				}),
 				formatting = {
 					fields = { "kind", "abbr", "menu" },
 					format = function(entry, item)
@@ -121,14 +122,14 @@ return {
 						return item
 					end,
 				},
-			}
+			})
 		end,
 	},
 	{
-		"L3M0N4D3/LuaSnip",
+		"L3MON4D3/LuaSnip",
 		dependencies = {
 			{
-				"rafamadrix/friendly-snippets",
+				"rafamadriz/friendly-snippets",
 				config = function()
 					require("luasnip.loaders.from_vscode").lazy_load()
 				end,
@@ -142,16 +143,30 @@ return {
 			{
 				"<C-j>",
 				function()
-					require("luasnip").jumpable(1) and "<Plug>luasnip-jump-next" or "<C-j>"
+					return require("luasnip").jumpable(1) and "<Plug>luasnip-jump-next" or "<C-j>"
 				end,
-				expr = true, remap = true, silent = true, mode = "i",
+				expr = true,
+				remap = true,
+				silent = true,
+				mode = "i",
 			},
-			{ "<C-j>" function() require("luasnip").jump(1) end, mode = "s" },
-			{ "<C-k>", function() require("luasnip").jump(-1) end, mode = { "i", "s", } },
+			{
+				"<C-j>",
+				function()
+					require("luasnip").jump(1)
+				end,
+				mode = "s",
+			},
+			{
+				"<C-k>",
+				function()
+					require("luasnip").jump(-1)
+				end,
+				mode = { "i", "s" },
+			},
 		},
 		config = function(_, opts)
 			require("luasnip").setup(opts)
 		end,
 	},
 }
-
